@@ -14,10 +14,29 @@ namespace CRUD_Alumnos.Controllers
         {
             try
             {
+                //string sql = @"
+                //        select a.ID as CodPais, a.Nombre, a.Apellido,a.Edad,a.Sexo,a.FechaRegistro, c.Nombre as NombrePais
+                //        from Alumno a
+                //        inner join Paises c on a.CodPais = c.ID";
+
                 using (var db = new AlumnoContent())
             {
-                //List<Alumno> lista = db.Alumno.Where(a => a.Edad > 18).ToList(); //Muestra solo los de la lista mayores de 18años
-                return View(db.Alumno.ToList());
+                    var data = from a in db.Alumno
+                               join c in db.Paises on a.CodPais equals c.ID
+                               select new AlumnoCE()
+                               {
+                                   ID = a.ID,
+                                   Nombre = a.Nombre,
+                                   Apellido = a.Apellido,
+                                   Edad = a.Edad,
+                                   Sexo = a.Sexo,
+                                   NombrePais = c.Nombre,
+                                   FechaRegistro = a.FechaRegistro
+                               };
+                    //list<alumno> lista = db.alumno.where(a => a.edad > 18).tolist(); //muestra solo los de la lista mayores de 18años
+                    return View(data.ToList());
+
+                    //return View(db.Database.SqlQuery<AlumnoCE>(sql));
             }
 
             }
@@ -66,6 +85,18 @@ namespace CRUD_Alumnos.Controllers
             
         }
 
+        public ActionResult Agregar2()
+        {
+            return View();
+        }
+
+        public ActionResult ListaPises()
+        {
+            using (var db = new AlumnoContent())
+            {
+                return PartialView(db.Paises.ToList());
+            }
+        }
         public ActionResult Editar(int ID)
         {
             try
@@ -144,5 +175,15 @@ namespace CRUD_Alumnos.Controllers
                 throw;
             }
         }
+
+        public  static string NombrePais (int CodPais)
+        {
+            using (var db = new AlumnoContent())
+            {
+                return db.Paises.Find(CodPais).Nombre;
+            }
+        }
+
+
     }
 }

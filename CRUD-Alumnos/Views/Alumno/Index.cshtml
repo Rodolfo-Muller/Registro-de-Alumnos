@@ -1,4 +1,4 @@
-﻿@model IEnumerable<CRUD_Alumnos.Models.Alumno>
+﻿@model IEnumerable<CRUD_Alumnos.Models.AlumnoCE>
 
 @{
     ViewBag.Title = "Lista de Alumnos";
@@ -20,6 +20,9 @@
         </th>
         <th>
             Sexo
+        </th>
+        <th>
+            Pais
         </th>
         <th>
             Fecha Alta
@@ -53,6 +56,9 @@
                 }
 
 
+            </td>
+            <td>
+                @item.NombrePais
             </td>
             <td>
                 @item.FechaRegistro.ToShortDateString()

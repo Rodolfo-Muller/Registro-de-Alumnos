@@ -1,0 +1,24 @@
+﻿@model IEnumerable<CRUD_Alumnos.Models.Paises>
+
+@*<p>
+    @Html.ActionLink("Create New", "Create")
+</p>
+<table class="table">
+    <tr>
+        <th>
+            @Html.DisplayNameFor(model => model.Nombre)
+        </th>
+        <th></th>
+    </tr>*@
+@*Este for each va a darme la forma del Select o del combo*@
+<select class="form-control" id="CodPais" name="CodPais">
+
+@foreach (var item in Model)
+{
+    @*EL ARROBA INDICA QUE ES CODIGO DE SERVIDOR   (RAZOR)*@
+    <option value="@item.ID" > @item.Nombre</option>
+}
+</select>
+
+
+

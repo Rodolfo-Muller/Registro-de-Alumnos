@@ -8,6 +8,7 @@ namespace CRUD_Alumnos.Models
 {
     public class AlumnoCE
     {
+        public int ID { get; set; }
         [Required]
         [Display(Name ="Ingrese Nombres: ")]
         public string Nombre { get; set; }
@@ -20,6 +21,13 @@ namespace CRUD_Alumnos.Models
         [Required]
         [Display(Name = "Sexo del Alumno: ")]
         public string Sexo { get; set; }
+        
+        [Display(Name = "Pais: ")]
+       public int CodPais { get; set; }
+       public string NombrePais { get; set; }
+       public string NombreCompleto { get { return Nombre + " " + Apellido; } }
+        public System.DateTime FechaRegistro { get; set; }
+        
 
     }
 
@@ -28,5 +36,7 @@ namespace CRUD_Alumnos.Models
     {
        // public int Estado { get; set; }
         public string NombreCompleto { get { return Nombre + " " + Apellido; } }
+
+        public string NombrePais { get; set; }
     }
 }
